@@ -354,11 +354,16 @@
             width: 100%;
             height: 500px;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease; /* This image in the about section should still be rotated */
+/*             transform: rotate(180deg); */
         }
 
         .about-image:hover img {
             transform: scale(1.05);
+        }
+
+        img:not([src*='bgtat.jpg']) {
+            filter: contrast(120%) brightness(110%) saturate(120%);
         }
 
         /* Portfolio Section */
@@ -384,6 +389,33 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
             perspective: 1000px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .spotlight-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 20%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .spotlight-effect:hover::before {
+            opacity: 1;
         }
 
         .portfolio-item {
@@ -468,7 +500,7 @@
         .portfolio-item img {
             width: 100%;
             height: 300px;
-            object-fit: cover;
+            object-fit: cover; /* Remove the 180-degree rotation from this image in the portfolio */
             transition: transform 0.4s ease;
             border-radius: 24px;
             position: relative;
@@ -846,84 +878,235 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <nav class="container">
-            <div class="logo">Tattoos by Stefan</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#catalog">Catalog</a></li>
-                <li><a href="#testimonials">Reviews</a></li>
-                <li><a href="#contact">Book Now</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <div class="logo">Stefan</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#catalog">Catalog</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Tattoos by Stefan</h1>
-            <p>Professional Tattoo Artistry in Wisconsin</p>
-            <a href="#contact" class="cta-button">Book Your Appointment</a>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Transforming Skin into Art</h1>
+            <p>Award-winning tattoo artist specializing in custom designs and breathtaking realism.</p>
+            <a href="#contact" class="cta-button">Book Your Consultation</a>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">Meet Stefan</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Your Local Wisconsin Tattoo Artist</h3>
-                    <p>Originally from La Crosse, Wisconsin, and now based in Viroqua, Stefan brings 5 years of dedicated tattoo artistry to the Driftless region. With a passion for creating meaningful, custom artwork that tells your story, Stefan specializes in bringing your vision to life with precision and artistry.</p>
-                    
-                    <p>Whether you want to visit Stefan's studio in Viroqua or prefer the convenience of having him come to you, Stefan offers flexible scheduling to make your tattoo experience as comfortable as possible. Each piece is crafted with attention to detail, using only the highest quality inks and maintaining the strictest safety standards.</p>
-                    
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <span class="number">5+</span>
-                            <span>Years Experience</span>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="number">100%</span>
-                            <span>Licensed & Insured</span>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="number">24/7</span>
-                            <span>Mobile Service</span>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="number">∞</span>
-                            <span>Custom Designs</span>
-                        </div>
+        <div class="container about-content">
+            <div class="about-text animate-in">
+                <h3>About Stefan</h3>
+                <p>Stefan has been a dedicated tattoo artist for over 15 years, bringing a unique blend of technical skill and artistic vision to each piece. Based in [Your City/Area, Wisconsin], he is known for his meticulous attention to detail and his ability to create personalized tattoos that tell a story.</p>
+                <p>Specializing in [Mention your key styles, e.g., black and grey realism, neo-traditional, Japanese], Stefan is committed to providing a safe, clean, and comfortable environment for all clients. He believes that a tattoo is a collaborative process between the artist and the client, ensuring that your vision is brought to life.</p>
+                <div class="about-highlights">
+                    <div class="highlight-item glass-card">
+                        <span class="number">15+</span> Years Experience
+                    </div>
+                    <div class="highlight-item glass-card">
+                        <span class="number">500+</span> Happy Clients
+                    </div>
+                    <div class="highlight-item glass-card">
+                        <span class="number">Award</span> Winning Artist
+                    </div>
+                    <div class="highlight-item glass-card">
+                        <span class="number">Custom</span> Designs
                     </div>
                 </div>
-                <div class="about-image-container">
-                    <div class="about-image">
-                        <img src="/api/placeholder/500/600" alt="Stefan at work" />
-                    </div>
+            </div>
+            <div class="about-image-container animate-in">
+                <div class="about-image">
+                    <img src="stefan1.jpg" alt="Stefan the tattoo artist working">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">Recent Work</h2>
+            <h2 class="section-title animate-in">Recent Work</h2>
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/400/300" alt="Stefan's tattoo work" />
+                <div class="portfolio-item animate-in spotlight-effect">
+                    <img src="stefan2.jpg" alt="Example Tattoo 1">
                     <div class="portfolio-overlay">
-                        <h3>Custom Design</h3>
-                        <p>Unique artwork tailored to client vision</p>
+                        <h3>Black and Grey Realism</h3>
+                        <p>Intricate portrait work with detailed shading.</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/400/300" alt="Stefan's tattoo work" />
+                <div class="portfolio-item animate-in spotlight-effect">
+                    <img src="stefan3.jpg" alt="Example Tattoo 2">
                     <div class="portfolio-overlay">
-                        <h3>Detailed Artwork</h3>
-                        <p>Precision craftsmanship in every line</p>
-                    
+                        <h3>Neo-Traditional Sleeve</h3>
+                        <p>Bold lines and vibrant colors in a classic style.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-in spotlight-effect">
+                    <img src="stefan4.jpg" alt="Example Tattoo 3">
+                    <div class="portfolio-overlay">
+                        <h3>Abstract Geometric</h3>
+                        <p>Clean lines and unique patterns.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-in spotlight-effect">
+                    <img src="stefan5.png" alt="Example Tattoo 4">
+                    <div class="portfolio-overlay">
+                        <h3>Japanese Inspired</h3>
+                        <p>Flowing designs and traditional motifs.</p>
+                    </div>
+                </div>
+                <!-- Add more portfolio items as needed -->
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2 class="section-title animate-in">Services & Styles</h2>
+            <div class="catalog-grid">
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Custom Design</h3>
+                    <p>Collaborative creation of unique tattoo concepts tailored to your ideas and story.</p>
+                </div>
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Black & Grey Realism</h3>
+                    <p>Detailed portraits, landscapes, and scenes rendered with subtle shading and contrast.</p>
+                </div>
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Color Tattoos</h3>
+                    <p>Vibrant and long-lasting color work in various styles, from bold to illustrative.</p>
+                </div>
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Cover-Ups</h3>
+                    <p>Skillful transformation of old or unwanted tattoos into beautiful new artwork.</p>
+                </div>
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Fine Line</h3>
+                    <p>Delicate and intricate designs using fine needles for precise details.</p>
+                </div>
+                <div class="catalog-item glass-card animate-in">
+                    <h3>Traditional/Neo-Traditional</h3>
+                    <p>Classic tattoo styles with bold outlines, solid colors, and iconic imagery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title animate-in">What Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial glass-card animate-in">
+                    <p class="testimonial-text">"Stefan is an incredibly talented artist. He took my vague idea and turned it into a masterpiece. The atmosphere was professional and comfortable. Highly recommend!"</p>
+                    <p class="testimonial-author">- Jamie L.</p>
+                </div>
+                <div class="testimonial glass-card animate-in">
+                    <p class="testimonial-text">"Couldn't be happier with my new tattoo. Stefan's attention to detail is amazing, and he made sure I was comfortable throughout the entire process."</p>
+                    <p class="testimonial-author">- Alex P.</p>
+                </div>
+                <div class="testimonial glass-card animate-in">
+                    <p class="testimonial-text">"The studio is clean and inviting, and Stefan is a true professional. My cover-up is flawless, I can't even tell there was an old tattoo underneath!"</p>
+                    <p class="testimonial-author">- Chris R.</p>
+                </div>
+                <!-- Add more testimonials as needed -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="form-section">
+        <div class="container forms-container">
+            <div class="contact-form form-card animate-in">
+                <h3>Book Your Consultation</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="idea">Tattoo Idea / Description</label>
+                        <textarea id="idea" name="idea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="placement">Placement on Body</label>
+                        <input type="text" id="placement" name="placement">
+                    </div>
+                    <div class="form-group">
+                        <label for="size">Approximate Size</label>
+                        <input type="text" id="size" name="size" placeholder="e.g., 4x6 inches">
+                    </div>
+                    <div class="form-group">
+                        <label for="style">Preferred Style (Optional)</label>
+                        <select id="style" name="style">
+                            <option value="">Select a style</option>
+                            <option value="realism">Black & Grey Realism</option>
+                            <option value="color">Color Tattoo</option>
+                            <option value="neo-traditional">Neo-Traditional</option>
+                            <option value="fine-line">Fine Line</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="cta-button">Submit Request</button>
+                </form>
+            </div>
+            <div class="location-info form-card animate-in">
+                <h3>Find Us</h3>
+                <p>Stefan's Studio</p>
+                <p>[Your Street Address]</p>
+                <p>[Your City], WI [Your Zip Code]</p>
+                <p>Email: <a href="mailto:your.email@example.com" style="color: var(--primary-blue); text-decoration: none;">your.email@example.com</a></p>
+                <p>Phone: [Your Phone Number]</p>
+                <p style="margin-top: 20px; color: var(--text-secondary);">Please note that studio visits are by appointment only. Book a consultation using the form to get started.</p>
+                <!-- Optional: Add a map embed here -->
+                <!-- 
+                <div style="width: 100%; height: 300px; background-color: #222; margin-top: 30px; border-radius: 12px;">
+                    Embed your Google Map here if you have one
+                </div> 
+                -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Stefan's Studio</h3>
+                <p>[Your City/Area], Wisconsin</p>
+                <p>Dedicated to creating unique and high-quality tattoos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about" style="color: var(--text-secondary); text-decoration: none;">About</a></li>
+                    <li><a href="#portfolio" style="color: var(--text-secondary); text-decoration: none;">Portfolio</a></li>
+                    <li><a href="#catalog" style="color: var(--text-secondary); text-decoration: none;">Services</a></li>
+                    <li><a href="#testimonials" style="color: var(--text-secondary); text-decoration: none;">Testimonials</a></li>
+                    <li><a href="#contact" style="color: var(--text-secondary); text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay updated on Instagram and other platforms!</p>
+                <!-- Add social media links here -->
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            &copy; 2023 Tattoos by Stefan. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
